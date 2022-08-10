@@ -2,8 +2,8 @@ import { List, Paper } from "@mui/material";
 import { Container } from "@mui/system";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import NavBar from "../integrated_auth/NavBar";
 import AddTodo from "./AddTodo";
+import NavBar from "./NavBar";
 import Todo from "./Todo";
 
 
@@ -13,7 +13,7 @@ function App() {
   // Todo 목록리스트
   const [ items, setItems ] = useState([]);
 
-  const REACT_APP_SPRING_BOOT = "http://192.168.219.103:8080"
+  const REACT_APP_SPRING_BOOT = "http://192.168.219.101:8080"
 
   // Todo 목록 가져오기 (GET)
   useEffect( () => {
