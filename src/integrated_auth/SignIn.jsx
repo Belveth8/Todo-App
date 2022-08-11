@@ -2,9 +2,16 @@ import { Button, Grid, TextField, Typography } from '@mui/material'
 import { Container } from '@mui/system'
 import axios from 'axios'
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import { API_BASE_URL } from '../api-config'
 
 function SignIn() {
+
+  const navi = useNavigate();
+
+  const gotoSignUp = () => {
+    navi("/signup");
+  }
 
   function signin(userDTO) {
     axios({
@@ -13,8 +20,13 @@ function SignIn() {
       data:userDTO
     })
       .then((response)=> {
-        console.log(response.data);
-      alert(response.data.token);
+        // console.log(response.data);
+        // localstorage에 받아온 데이터 저장
+        if (response.data.token) {
+          localStorage.setItem("ACCESS_TOKEN", response.data.token);
+          // 토큰이 존재하는 경우 TODO 화면으로 리디렉트
+          navi("/");
+        }
     })
   }
 
@@ -73,8 +85,20 @@ function SignIn() {
               fullWidth 
               variant='contained'
               color='primary'
+              onClick={console.log("signin btn evnt!")}
             >
             sigiin
+          </Button>
+        </Grid>
+        <Grid item xs={12}>
+          <Button 
+              type='submit' 
+              fullWidth 
+              variant='contained'
+              color='primary'
+              onClick={gotoSignUp}
+            >
+            signup
           </Button>
         </Grid>
     </Grid>

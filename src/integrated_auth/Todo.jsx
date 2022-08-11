@@ -13,6 +13,7 @@ function Todo(props) {
   const editItem = props.editItem;
   const removeItem = props.removeItem; 
 
+  // list 클릭 시 입력모드 on
   const offReadOnlyMode = () => {
     console.log("Event!", readOnly);
     setReadOnly(false)
@@ -31,7 +32,6 @@ function Todo(props) {
   const editEventHandler = e => {
    let update = { ...item, title:e.target.value  }
     setItem(update);
-    editItem(item);
   }
   // Todo 삭제
   const removeEventHandler = () => {
@@ -41,8 +41,8 @@ function Todo(props) {
   // 체크박스
   const checkBoxEventHandler = (e) => {
     item.done = e.target.checked;
+    console.log(item.done);
     editItem(item);
-    console.log(item.done)
   }
 
 
@@ -68,10 +68,9 @@ function Todo(props) {
          />
       </ListItemText>
       <ListItemSecondaryAction>
-        <IconButton>
-          <DeleteOutlined 
-            onClick = { removeEventHandler }
-          />
+        <IconButton
+        onClick = { removeEventHandler }>
+          <DeleteOutlined />
         </IconButton>
       </ListItemSecondaryAction>
     </ListItem>
